@@ -1,0 +1,6 @@
+{
+  "name": "Bangladesh Mixed Martial Arts Association (BMMAA)",
+  "description": "Official website of the Bangladesh Mixed Martial Arts Association, the regulatory body for amateur MMA in Bangladesh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
