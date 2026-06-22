@@ -1,32 +1,57 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Board', href: '#board' },
+  { label: 'Executive Board', href: '/executive-board' },
   { label: 'Events', href: '#events' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-neutral-100">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-navbar/95 backdrop-blur-md border-b border-neutral-800 shadow-lg'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
       <nav className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-primary-500 font-heading tracking-tight">
-          BMMAA
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/BMMAA%20LOGO.png"
+            alt="BMMAA Logo"
+            width={140}
+            height={40}
+            className="h-[54px] w-auto rounded-full"
+            priority
+          />
+          <span className={`hidden sm:block text-xs leading-tight font-medium ${scrolled ? 'text-neutral-200' : 'text-secondary-500'}`}>
+            Bangladesh Mixed<br />Martial Arts Association
+          </span>
         </Link>
 
-        <div className="hidden md:flex gap-8 text-sm font-medium text-neutral-700">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="hover:text-primary-500 transition-colors"
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-secondary-500 hover:text-secondary-400 hover:bg-secondary-500/10'}`}
             >
               {link.label}
             </a>
@@ -34,7 +59,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-neutral-700"
+          className={`md:hidden p-2 rounded-lg transition-all ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-secondary-500 hover:text-secondary-400 hover:bg-secondary-500/10'}`}
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -43,12 +68,12 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-white border-t border-neutral-100 px-4 pb-4">
+        <div className="md:hidden bg-navbar border-t border-neutral-800 px-4 pb-4 animate-slide-down">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="block py-3 text-sm font-medium text-neutral-700 hover:text-primary-500 transition-colors"
+              className="block py-3 text-sm font-medium text-neutral-400 hover:text-secondary-500 transition-colors"
               onClick={() => setOpen(false)}
             >
               {link.label}

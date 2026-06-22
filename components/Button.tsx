@@ -1,5 +1,5 @@
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'hero-outline';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   href?: string;
@@ -13,12 +13,13 @@ export default function Button({
   href,
   onClick 
 }: ButtonProps) {
-  const baseStyles = 'font-semibold transition-all duration-300 rounded-lg';
+  const baseStyles = 'font-semibold transition-all duration-300 rounded-lg inline-flex items-center justify-center';
   
   const variants = {
-    primary: 'bg-primary-500 text-white hover:bg-primary-600 hover:shadow-lg',
-    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600',
-    outline: 'border-2 border-primary-500 text-primary-500 hover:bg-primary-50',
+    primary: 'bg-neutral-900 text-white hover:bg-neutral-800 hover:shadow-lg active:scale-[0.98]',
+    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 hover:shadow-glow active:scale-[0.98]',
+    outline: 'border-2 border-neutral-900 text-neutral-900 hover:bg-neutral-100 active:scale-[0.98]',
+    'hero-outline': 'border-2 border-white/30 text-white hover:bg-white/10 hover:border-secondary-500/50 active:scale-[0.98]',
   };
   
   const sizes = {
