@@ -11,6 +11,7 @@ const config: Config = {
         primary: {
           50: '#f0f4ff',
           100: '#e0e9ff',
+          200: '#c7d2fe',
           500: '#003366',
           600: '#002952',
           700: '#001f3f',
@@ -28,14 +29,16 @@ const config: Config = {
         neutral: {
           50: '#f9fafb',
           100: '#f3f4f6',
+          600: '#6b7280',
           700: '#374151',
           800: '#1f2937',
           900: '#111827',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'Poppins', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Inter', 'Poppins', 'sans-serif'],
+        heading: ['var(--font-heading)', 'Space_Grotesk', 'sans-serif'],
+        display: ['var(--font-heading)', 'Poppins', 'sans-serif'],
       },
       fontSize: {
         'display-lg': '3rem',
