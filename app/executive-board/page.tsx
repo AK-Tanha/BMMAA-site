@@ -22,30 +22,42 @@ export default function ExecutiveBoardPage() {
         id="executive-board"
         title="Executive Board"
         subtitle="Leading the development of MMA in Bangladesh"
-        className="bg-white"
+        className="relative bg-white overflow-hidden"
       >
-        {/* President */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <BoardMemberCard member={president} variant="featured" />
-        </div>
+        {/* Rank chevron pattern */}
+        <svg className="absolute inset-0 w-full h-full text-neutral-900/10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="rank-chevrons" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M10 26L20 14 30 26" fill="none" stroke="currentColor" strokeWidth="0.6" />
+              <path d="M4 34L20 18 36 34" fill="none" stroke="currentColor" strokeWidth="0.4" opacity="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#rank-chevrons)" />
+        </svg>
+        <div className="relative z-10">
+          {/* President */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <BoardMemberCard member={president} variant="featured" />
+          </div>
 
-        {/* Vice President & Treasurer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <BoardMemberCard member={vicePresident} variant="minimal" />
-          <BoardMemberCard member={treasurer} variant="minimal" />
-        </div>
+          {/* Vice President & Treasurer */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <BoardMemberCard member={vicePresident} variant="minimal" />
+            <BoardMemberCard member={treasurer} variant="minimal" />
+          </div>
 
-        {/* Secretary & Joint Secretary */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <BoardMemberCard member={secretary} variant="minimal" />
-          <BoardMemberCard member={jointSecretary} variant="minimal" />
-        </div>
+          {/* Secretary & Joint Secretary */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <BoardMemberCard member={secretary} variant="minimal" />
+            <BoardMemberCard member={jointSecretary} variant="minimal" />
+          </div>
 
-        {/* Members */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {members.map((member, index) => (
-            <BoardMemberCard key={member.id} member={member} variant="minimal" />
-          ))}
+          {/* Members */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {members.map((member, index) => (
+              <BoardMemberCard key={member.id} member={member} variant="minimal" />
+            ))}
+          </div>
         </div>
       </Section>
     </main>

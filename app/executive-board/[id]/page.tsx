@@ -32,8 +32,18 @@ export default async function MemberPage({ params }: Props) {
 
   return (
     <main className="min-h-screen pt-16 md:pt-20">
-      <Section className="bg-neutral-50">
-        <div className="max-w-4xl mx-auto">
+      <Section className="relative bg-neutral-50 overflow-hidden">
+        {/* Badge ring pattern */}
+        <svg className="absolute inset-0 w-full h-full text-secondary-500/10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="badge-rings" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="4" fill="currentColor" opacity="0.3" />
+              <circle cx="30" cy="30" r="12" fill="none" stroke="currentColor" strokeWidth="0.4" opacity="0.35" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#badge-rings)" />
+        </svg>
+        <div className="max-w-4xl mx-auto relative z-10">
           <Link
             href="/executive-board"
             className="inline-flex items-center gap-2 text-neutral-600 hover:text-secondary-500 transition-colors mb-8"

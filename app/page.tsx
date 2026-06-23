@@ -19,38 +19,37 @@ export default function Home() {
       />
 
       <Section id="about" title="About BMMAA" className="relative bg-neutral-50 pt-24 md:pt-32 overflow-hidden">
-        {/* Subtle geometric decoration */}
-        <svg className="absolute top-0 right-0 w-48 md:w-64 h-48 md:h-64 text-secondary-500/20 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="100,10 190,50 190,150 100,190 10,150 10,50" stroke="currentColor" strokeWidth="2" />
-          <polygon points="100,40 160,65 160,135 100,160 40,135 40,65" stroke="currentColor" strokeWidth="1" />
-          <polygon points="100,70 130,85 130,115 100,130 70,115 70,85" stroke="currentColor" strokeWidth="0.5" />
-        </svg>
-        <svg className="absolute bottom-0 left-0 w-32 md:w-48 h-32 md:h-48 text-secondary-500/20 pointer-events-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="1" />
-          <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="0.5" />
-          <circle cx="50" cy="50" r="15" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" />
+        {/* Shield scale pattern */}
+        <svg className="absolute inset-0 w-full h-full text-secondary-500/[0.05] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="shield-scales" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M15 0L30 15 15 30 0 15Z" fill="none" stroke="currentColor" strokeWidth="0.4" />
+              <circle cx="15" cy="15" r="1.5" fill="currentColor" opacity="0.3" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#shield-scales)" />
         </svg>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
-          <div className="animate-slide-up">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="animate-slide-up group">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[200px] md:min-h-[300px] transition-transform duration-700 group-hover:scale-[1.02]">
               <Image
-                src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80"
+                src="/About.jpeg"
                 alt="BMMAA - Bangladesh Mixed Martial Arts Association"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-[8s] group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-secondary-500/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-secondary-500/20 to-transparent transition-opacity duration-500 group-hover:opacity-60" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 md:p-6">
-                <p className="text-white font-semibold text-sm md:text-lg">Since {ORGANIZATION.founded}</p>
+                <p className="text-white font-semibold text-sm md:text-lg animate-pulse">Since {ORGANIZATION.founded}</p>
               </div>
             </div>
           </div>
-          <div className="space-y-4 md:space-y-6 text-neutral-700 leading-relaxed text-base md:text-lg animate-slide-up animate-delay-200">
-            <p>
+          <div className="space-y-4 md:space-y-6 animate-slide-up animate-delay-200">
+            <p className="text-neutral-700 leading-relaxed text-base md:text-lg animate-fade-in animate-delay-300">
               BMMAA has been registered under &quot;Bangladesh Martial Arts Confederation&quot; and &quot;National Sports Council&quot; under the Ministry of Youth and Sports since {ORGANIZATION.founded}. BMMAA is the first MMA governing body in Bangladesh.
             </p>
-            <p>
+            <p className="text-neutral-700 leading-relaxed text-base md:text-lg animate-fade-in animate-delay-500">
               Our mission is to develop, promote, and regulate the sport of Mixed Martial Arts across Bangladesh, ensuring safety, fairness, and professionalism at all levels of competition.
             </p>
           </div>
@@ -78,27 +77,30 @@ export default function Home() {
 
 
       <Section id="contact" title="Contact Us" subtitle="Get in touch with the association" className="relative bg-neutral-50 overflow-hidden">
-        {/* Crosshair target pattern */}
+        {/* Connection wave pattern */}
         <svg className="absolute inset-0 w-full h-full text-secondary-500/[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="crosshair" width="120" height="120" patternUnits="userSpaceOnUse">
-              <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              <circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" strokeWidth="0.3" />
-              <circle cx="60" cy="60" r="15" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              <line x1="5" y1="60" x2="115" y2="60" stroke="currentColor" strokeWidth="0.3" />
-              <line x1="60" y1="5" x2="60" y2="115" stroke="currentColor" strokeWidth="0.3" />
+            <pattern id="connect-waves" width="50" height="50" patternUnits="userSpaceOnUse">
+              <circle cx="25" cy="25" r="2" fill="currentColor" opacity="0.3" />
+              <path d="M0 25Q12.5 10 25 25Q37.5 40 50 25" fill="none" stroke="currentColor" strokeWidth="0.3" />
+              <path d="M0 0Q25 25 50 0" fill="none" stroke="currentColor" strokeWidth="0.2" opacity="0.4" />
+              <path d="M0 50Q25 25 50 50" fill="none" stroke="currentColor" strokeWidth="0.2" opacity="0.4" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#crosshair)" />
+          <rect width="100%" height="100%" fill="url(#connect-waves)" />
         </svg>
-        {/* Bold corner brackets */}
-        <svg className="absolute top-0 right-0 w-24 md:w-40 h-24 md:h-40 text-secondary-500/15 pointer-events-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M95 5V40C95 69.6 69.6 95 40 95H5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M95 5H60C30.4 5 5 30.4 5 60V95" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeDasharray="4 4" opacity="0.5" />
+        {/* Signal bars accents */}
+        <svg className="absolute top-0 right-0 w-16 md:w-28 h-16 md:h-28 text-secondary-500/20 pointer-events-none" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="35" width="8" height="20" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="18" y="25" width="8" height="30" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="31" y="15" width="8" height="40" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="44" y="5" width="8" height="50" stroke="currentColor" strokeWidth="1.5" />
         </svg>
-        <svg className="absolute bottom-0 left-0 w-24 md:w-40 h-24 md:h-40 text-secondary-500/15 pointer-events-none rotate-180" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M95 5V40C95 69.6 69.6 95 40 95H5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M95 5H60C30.4 5 5 30.4 5 60V95" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeDasharray="4 4" opacity="0.5" />
+        <svg className="absolute bottom-0 left-0 w-16 md:w-28 h-16 md:h-28 text-secondary-500/20 pointer-events-none rotate-180" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="35" width="8" height="20" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="18" y="25" width="8" height="30" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="31" y="15" width="8" height="40" stroke="currentColor" strokeWidth="1.5" />
+          <rect x="44" y="5" width="8" height="50" stroke="currentColor" strokeWidth="1.5" />
         </svg>
         <ContactForm />
       </Section>
