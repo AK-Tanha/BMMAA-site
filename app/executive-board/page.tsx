@@ -25,8 +25,8 @@ export default function ExecutiveBoardPage() {
         className="bg-white"
       >
         {/* President */}
-        <div className="max-w-lg mx-auto mb-12">
-          <BoardMemberCard member={president} variant="minimal" />
+        <div className="max-w-3xl mx-auto mb-12">
+          <BoardMemberCard member={president} variant="featured" />
         </div>
 
         {/* Vice President & Treasurer */}
@@ -42,7 +42,7 @@ export default function ExecutiveBoardPage() {
         </div>
 
         {/* Members */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {members.map((member, index) => (
             <BoardMemberCard key={member.id} member={member} variant="minimal" />
           ))}
