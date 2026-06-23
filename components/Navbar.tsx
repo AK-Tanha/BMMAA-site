@@ -6,10 +6,10 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
+  { label: 'About', href: '/#about' },
   { label: 'Executive Board', href: '/executive-board' },
-  { label: 'Events', href: '#events' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Events', href: '/#events' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -41,7 +41,7 @@ export default function Navbar() {
             className="h-[54px] w-auto rounded-full"
             priority
           />
-          <span className={`hidden sm:block text-xs leading-tight font-medium ${scrolled ? 'text-neutral-200' : 'text-secondary-500'}`}>
+          <span className={`hidden sm:block text-xs leading-tight font-medium ${scrolled ? 'text-neutral-200' : 'text-white/90 drop-shadow-md'}`}>
             Bangladesh Mixed<br />Martial Arts Association
           </span>
         </Link>
@@ -51,7 +51,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-secondary-500 hover:text-secondary-400 hover:bg-secondary-500/10'}`}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-white/90 drop-shadow-md hover:text-white hover:bg-white/10'}`}
             >
               {link.label}
             </a>
@@ -59,7 +59,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className={`md:hidden p-2 rounded-lg transition-all ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-secondary-500 hover:text-secondary-400 hover:bg-secondary-500/10'}`}
+          className={`md:hidden p-2 rounded-lg transition-all ${scrolled ? 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/10' : 'text-white/90 drop-shadow-md hover:text-white hover:bg-white/10'}`}
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >

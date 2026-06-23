@@ -32,7 +32,7 @@ export default function Affiliations() {
       </svg>
 
       {/* Diagonal line accent */}
-      <svg className="absolute -top-40 -right-40 w-96 h-96 text-secondary-500/15 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute -top-20 md:-top-40 -right-20 md:-right-40 w-48 md:w-96 h-48 md:h-96 text-secondary-500/15 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" />
         <circle cx="100" cy="100" r="60" stroke="currentColor" strokeWidth="0.5" />
         <path d="M20 100H180" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
@@ -40,7 +40,7 @@ export default function Affiliations() {
       </svg>
 
       {/* Small decorative dots scattered */}
-      <svg className="absolute bottom-20 left-10 w-20 h-20 text-secondary-500/25 pointer-events-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute bottom-10 md:bottom-20 left-4 md:left-10 w-12 md:w-20 h-12 md:h-20 text-secondary-500/25 pointer-events-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="10" cy="10" r="3" fill="currentColor" />
         <circle cx="40" cy="25" r="2" fill="currentColor" />
         <circle cx="70" cy="10" r="4" fill="currentColor" />

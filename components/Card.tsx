@@ -33,7 +33,7 @@ export default function Card({
         </>
       )}
 
-      <div className="rounded-2xl overflow-hidden p-10">{children}</div>
+      <div className="rounded-2xl overflow-hidden p-4 md:p-10">{children}</div>
     </div>
   );
 }

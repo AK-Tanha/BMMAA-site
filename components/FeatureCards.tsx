@@ -5,19 +5,19 @@ const features = [
     icon: Shield,
     title: 'Governing Body',
     description: 'Officially registered under Bangladesh Martial Arts Confederation and National Sports Council since 2016.',
-    href: '#about',
+    href: '/#about',
   },
   {
     icon: Users,
     title: 'Executive Board',
     description: 'Led by experienced professionals dedicated to growing amateur MMA across Bangladesh.',
-    href: '#board',
+    href: '/#board',
   },
   {
     icon: Calendar,
     title: 'Events & Programs',
     description: 'Organizing events, training programs, and championships for athletes nationwide.',
-    href: '#contact',
+    href: '/#contact',
   },
 ];
 

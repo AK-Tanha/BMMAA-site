@@ -14,15 +14,18 @@ interface BoardMemberCardProps {
   member: BoardMember;
   index?: number;
   variant?: 'default' | 'featured' | 'compact' | 'minimal';
+  brackets?: boolean;
+  hover?: boolean;
 }
 
-export default function BoardMemberCard({ member, index = 0, variant = 'default' }: BoardMemberCardProps) {
+export default function BoardMemberCard({ member, index = 0, variant = 'default', brackets, hover }: BoardMemberCardProps) {
   const isFeatured = variant === 'featured';
   const isCompact = variant === 'compact';
   const isMinimal = variant === 'minimal';
-  const imgHeight = isFeatured ? 'h-[560px]' : isCompact ? 'h-72' : isMinimal ? 'h-[460px]' : 'h-[520px]';
+  const showBrackets = brackets !== undefined ? brackets : !isMinimal;
+  const imgHeight = isFeatured ? 'h-[400px] md:h-[560px]' : isCompact ? 'h-72' : isMinimal ? 'h-[360px] md:h-[460px]' : 'h-[400px] md:h-[520px]';
 
-  const wrapperClasses = `-mx-10 -mt-10 -mb-10 ${imgHeight} overflow-hidden relative`;
+  const wrapperClasses = `-mx-4 md:-mx-10 -mt-4 md:-mt-10 -mb-4 md:-mb-10 ${imgHeight} overflow-hidden relative`;
 
   const textOverlay = (
     <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -72,7 +75,8 @@ export default function BoardMemberCard({ member, index = 0, variant = 'default'
     <Card
       className={`animate-slide-up ${member.id ? 'cursor-pointer' : ''}`}
       style={{ animationDelay: `${(index + 1) * 80}ms` }}
-      brackets={!isMinimal}
+      brackets={showBrackets}
+      hover={hover}
     >
       {member.id ? (
         <Link href={`/executive-board/${member.id}`} className="block">
