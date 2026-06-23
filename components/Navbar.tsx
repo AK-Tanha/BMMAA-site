@@ -2,19 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
   { label: 'About', href: '/#about' },
   { label: 'Executive Board', href: '/executive-board' },
-  { label: 'Events', href: '/#events' },
+/*   { label: 'Events', href: '/#events' }, */
   { label: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -26,7 +29,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        !isHome || scrolled
           ? 'bg-navbar/95 backdrop-blur-md border-b border-neutral-800 shadow-lg'
           : 'bg-transparent border-b border-transparent'
       }`}

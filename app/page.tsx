@@ -1,9 +1,9 @@
+import Image from 'next/image';
 import HeroSection from '@/components/HeroSection';
 import Section from '@/components/Section';
 import BoardCarousel from '@/components/BoardCarousel';
 import Button from '@/components/Button';
 import ContactForm from '@/components/ContactForm';
-import Affiliations from '@/components/Affiliations';
 import { ORGANIZATION } from '@/lib/constants';
 import { boardMembers } from '@/data/boardMembers';
 
@@ -33,10 +33,12 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
           <div className="animate-slide-up">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80"
                 alt="BMMAA - Bangladesh Mixed Martial Arts Association"
-                className="w-full h-[250px] sm:h-[350px] md:h-[400px] object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-secondary-500/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 md:p-6">

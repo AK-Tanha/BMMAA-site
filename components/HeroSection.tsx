@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Button from './Button';
 import { ORGANIZATION } from '@/lib/constants';
 
@@ -46,10 +47,13 @@ export default function HeroSection({
       </svg>
 
       {backgroundImage && (
-        <img
-          src={backgroundImage}
+        <Image
+          src={backgroundImage.startsWith('http') || backgroundImage.startsWith('/') ? backgroundImage : `/${backgroundImage}`}
           alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover opacity-26"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover opacity-26"
         />
       )}
 

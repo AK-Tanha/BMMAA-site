@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Card from './Card';
 import { User } from 'lucide-react';
 
@@ -47,10 +48,12 @@ export default function BoardMemberCard({ member, index = 0, variant = 'default'
     <>
       {member.image ? (
         <div className={wrapperClasses}>
-          <img
+          <Image
             src={member.image.startsWith('http') ? member.image : `/${encodeURIComponent(member.image)}`}
             alt={member.name}
-            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
           {textOverlay}
