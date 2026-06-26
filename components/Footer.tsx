@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer className="bg-neutral-900 text-neutral-300">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-3 mb-2">
               <Image
                 src="/BMMAA%20LOGO.png"
@@ -30,7 +30,7 @@ export default function Footer() {
               <li><a href="/#contact" className="text-neutral-400 hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
-          <div>
+          <div className="text-right">
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Connect</h4>
             <ul className="space-y-3 text-sm">
               <li>

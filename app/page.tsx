@@ -19,6 +19,22 @@ export default function Home() {
       />
 
       <Section id="about" title="About BMMAA" className="relative bg-neutral-50 pt-24 md:pt-32 overflow-hidden">
+        {/* Gradient background */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="about-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f5f5f5" />
+              <stop offset="50%" stopColor="#fef2f2" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#f5f5f5" />
+            </linearGradient>
+            <radialGradient id="about-grad-accent" cx="20%" cy="20%" r="60%">
+              <stop offset="0%" stopColor="#dc2626" stopOpacity="0.04" />
+              <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#about-grad)" />
+          <rect width="100%" height="100%" fill="url(#about-grad-accent)" />
+        </svg>
         {/* Shield scale pattern */}
         <svg className="absolute inset-0 w-full h-full text-secondary-500/[0.05] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -56,7 +72,57 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="board" title="Executive Board" className="relative bg-white">
+      <Section id="president-speech" title="President's Speech" className="relative bg-gradient-to-br from-white via-neutral-50 to-accent-50/30">
+        {/* Quotation mark pattern */}
+        <svg className="absolute inset-0 w-full h-full text-accent-500/[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="quote-pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+              <text x="10" y="40" fontSize="40" fill="currentColor" fontWeight="bold">&quot;</text>
+              <text x="50" y="70" fontSize="24" fill="currentColor" fontWeight="bold" opacity="0.5">&quot;</text>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#quote-pattern)" />
+        </svg>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center relative z-10">
+          <div className="lg:col-span-2 animate-slide-up group">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-sm mx-auto lg:mx-0 transition-transform duration-700 group-hover:scale-[1.02]">
+              <div className="aspect-[3/4] relative">
+                <Image
+                  src="/President Major (Retd) Mizanur Rahman.png"
+                  alt="Retd. Major Mizanur Rahman - President"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-[8s] group-hover:scale-110"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <p className="text-white font-bold text-lg md:text-xl">Retd. Major Mizanur Rahman</p>
+                <p className="text-accent-300 text-sm md:text-base">President, BMMAA</p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-3 space-y-6 animate-slide-up animate-delay-200">
+            <div className="relative">
+              <svg className="absolute -top-4 -left-4 w-10 h-10 text-accent-500/30" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 20C0 8.954 8.954 0 20 0v4c-8.837 0-16 7.163-16 16H0zm20 0c0-11.046 8.954-20 20-20v4c-8.837 0-16 7.163-16 16h-4z" />
+              </svg>
+              <blockquote className="text-neutral-700 leading-relaxed text-base md:text-lg italic pl-4 md:pl-6 border-l-4 border-accent-500 animate-fade-in animate-delay-300">
+                &quot;It is my honor to lead the Bangladesh Mixed Martial Arts Association as we strive to develop, promote, and regulate the sport of Mixed Martial Arts across Bangladesh. Our commitment to safety, fairness, and professionalism remains unwavering. Together with our dedicated board members and the support of the Ministry of Youth and Sports, we are building a strong foundation for the future of MMA in our country. I invite all enthusiasts, athletes, and stakeholders to join us in this journey to elevate Bangladeshi MMA on the international stage.&quot;
+              </blockquote>
+              <svg className="absolute -bottom-4 -right-4 w-8 h-8 text-accent-500/30 rotate-180" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 20C0 8.954 8.954 0 20 0v4c-8.837 0-16 7.163-16 16H0zm20 0c0-11.046 8.954-20 20-20v4c-8.837 0-16 7.163-16 16h-4z" />
+              </svg>
+            </div>
+            <div className="text-right animate-fade-in animate-delay-500">
+              <p className="font-semibold text-neutral-900">- Retd. Major Mizanur Rahman</p>
+              <p className="text-neutral-500 text-sm">President, Bangladesh Mixed Martial Arts Association</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="board" title="Executive Board" className="relative bg-gradient-to-br from-neutral-50 via-white to-neutral-100">
         {/* Diamond grid pattern */}
         <svg className="absolute inset-0 w-full h-full text-neutral-900/10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -76,7 +142,7 @@ export default function Home() {
       </Section>
 
 
-      <Section id="contact" title="Contact Us" subtitle="Get in touch with the association" className="relative bg-neutral-50 overflow-hidden">
+      <Section id="contact" title="Contact Us" subtitle="Get in touch with the association" className="relative bg-gradient-to-br from-neutral-50 via-white to-secondary-500/[0.03]">
         {/* Connection wave pattern */}
         <svg className="absolute inset-0 w-full h-full text-secondary-500/[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs>

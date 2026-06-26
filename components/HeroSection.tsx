@@ -18,7 +18,7 @@ export default function HeroSection({
   backgroundImage,
 }: HeroSectionProps) {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16 md:pt-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-10 md:pt-20">
       <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-700 to-primary-800" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(220,38,38,0.08)_0%,transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(249,115,22,0.04)_0%,transparent_50%)]" />
