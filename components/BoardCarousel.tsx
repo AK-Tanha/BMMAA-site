@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import BoardMemberCard from './BoardMemberCard';
 
@@ -18,104 +18,82 @@ interface BoardCarouselProps {
 
 export default function BoardCarousel({ members }: BoardCarouselProps) {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState<'right' | 'left'>('right');
   const total = members.length;
-  const desktopRef = useRef<HTMLDivElement>(null);
-  const mobileRef = useRef<HTMLDivElement>(null);
-  const animKeyRef = useRef(0);
-
-  const triggerSlide = useCallback((dir: 'right' | 'left') => {
-    const cls = dir === 'right' ? 'slide-from-right' : 'slide-from-left';
-    const other = dir === 'right' ? 'slide-from-left' : 'slide-from-right';
-
-    [desktopRef, mobileRef].forEach((ref) => {
-      const el = ref.current;
-      if (!el) return;
-      el.classList.remove(other);
-      void el.offsetWidth;
-      el.classList.add(cls);
-    });
-  }, []);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const animatingRef = useRef(false);
 
   const goTo = useCallback((index: number) => {
     setCurrent(((index % total) + total) % total);
   }, [total]);
 
   const prev = () => {
-    if (animKeyRef.current) return;
-    animKeyRef.current = 1;
-    const dir = 'left';
-    setDirection(dir);
-    triggerSlide(dir);
+    if (animatingRef.current) return;
+    animatingRef.current = true;
     goTo(current - 1);
-    setTimeout(() => { animKeyRef.current = 0; }, 400);
+    setTimeout(() => { animatingRef.current = false; }, 500);
   };
 
   const next = useCallback(() => {
-    if (animKeyRef.current) return;
-    animKeyRef.current = 1;
-    const dir = 'right';
-    setDirection(dir);
-    triggerSlide(dir);
+    if (animatingRef.current) return;
+    animatingRef.current = true;
     goTo(current + 1);
-    setTimeout(() => { animKeyRef.current = 0; }, 400);
-  }, [goTo, current, triggerSlide]);
+    setTimeout(() => { animatingRef.current = false; }, 500);
+  }, [goTo, current]);
 
   useEffect(() => {
-    const interval = setInterval(next, 4000);
-    return () => clearInterval(interval);
+    intervalRef.current = setInterval(next, 4000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [next]);
 
-  const prevMember = members[(current - 1 + total) % total];
-  const nextMember = members[(current + 1) % total];
+  const extendedDesktop = [...members.slice(-2), ...members, ...members.slice(0, 2)];
+  const extendedMobile = [members[total - 1], ...members, members[0]];
+
+  const desktopOffset = (1 + current) * (100 / 3);
+  const mobileOffset = (1 + current) * 100;
 
   return (
     <div className="relative">
-      <style>{`
-        @keyframes slide-right {
-          from { transform: translateX(45px); }
-          to { transform: translateX(0); }
-        }
-        @keyframes slide-left {
-          from { transform: translateX(-45px); }
-          to { transform: translateX(0); }
-        }
-        .slide-from-right {
-          animation: slide-right 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
-        }
-        .slide-from-left {
-          animation: slide-left 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
-        }
-      `}</style>
-
-      {/* Desktop: 3-card carousel */}
-      <div className="hidden lg:flex items-center justify-center">
+      <div className="hidden lg:block overflow-hidden py-5">
         <div
-          ref={desktopRef}
-          className="flex items-center justify-center gap-6 w-full max-w-5xl mx-auto will-change-transform"
+          className="flex transition-transform duration-500 ease-out will-change-transform"
+          style={{ transform: `translateX(-${desktopOffset}%)` }}
         >
-          <div className="flex-1 max-w-[35%] shrink-0 z-0">
-            <div className="scale-[0.75] transition-all duration-500">
-              <BoardMemberCard member={prevMember} brackets={false} hover={false} />
-            </div>
-          </div>
-          <div className="flex-[1.3] shrink-0 z-10">
-            <BoardMemberCard member={members[current]} hover={false} />
-          </div>
-          <div className="flex-1 max-w-[35%] shrink-0 z-0">
-            <div className="scale-[0.75] transition-all duration-500">
-              <BoardMemberCard member={nextMember} brackets={false} hover={false} />
-            </div>
-          </div>
+          {extendedDesktop.map((member, i) => {
+            const isPrev = i === 1 + current;
+            const isCurrent = i === 2 + current;
+            const isNext = i === 3 + current;
+            const visible = isPrev || isCurrent || isNext;
+            return (
+              <div key={`${member.id}-${i}`} className="w-1/3 shrink-0 px-3">
+                <div
+                  className={`transition-all duration-500 ${
+                    isCurrent
+                      ? 'scale-100 opacity-100 z-10'
+                      : visible
+                        ? 'scale-[0.65] opacity-60'
+                        : 'scale-[0.6] opacity-0 pointer-events-none'
+                  }`}
+                >
+                  <BoardMemberCard member={member} brackets={isCurrent} hover={false} cardClassName="shadow-none" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Mobile/Tablet: single card */}
-      <div className="lg:hidden">
-        <div className="relative mx-auto w-full max-w-[420px] px-0">
-          <div ref={mobileRef} className="w-full will-change-transform">
-            <BoardMemberCard member={members[current]} hover={false} />
-          </div>
+      <div className="lg:hidden overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-out will-change-transform"
+          style={{ transform: `translateX(-${mobileOffset}%)` }}
+        >
+          {extendedMobile.map((member, i) => (
+            <div key={`${member.id}-m-${i}`} className="w-full shrink-0 px-4">
+              <BoardMemberCard member={member} hover={false} cardClassName="shadow-none" />
+            </div>
+          ))}
         </div>
       </div>
 

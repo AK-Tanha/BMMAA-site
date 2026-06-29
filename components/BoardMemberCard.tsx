@@ -17,9 +17,10 @@ interface BoardMemberCardProps {
   variant?: 'default' | 'featured' | 'compact' | 'minimal';
   brackets?: boolean;
   hover?: boolean;
+  cardClassName?: string;
 }
 
-export default function BoardMemberCard({ member, index = 0, variant = 'default', brackets, hover }: BoardMemberCardProps) {
+export default function BoardMemberCard({ member, index = 0, variant = 'default', brackets, hover, cardClassName = '' }: BoardMemberCardProps) {
   const isFeatured = variant === 'featured';
   const isCompact = variant === 'compact';
   const isMinimal = variant === 'minimal';
@@ -76,7 +77,7 @@ export default function BoardMemberCard({ member, index = 0, variant = 'default'
 
   return (
     <Card
-      className={`animate-slide-up ${member.id ? 'cursor-pointer' : ''}`}
+      className={`animate-slide-up ${member.id ? 'cursor-pointer' : ''} ${cardClassName}`}
       style={{ animationDelay: `${(index + 1) * 80}ms` }}
       brackets={showBrackets}
       hover={hover}
