@@ -16,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
   const pathname = usePathname();
   const isHome = pathname === '/';
 
@@ -25,6 +26,23 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [isHome]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -41,11 +59,15 @@ export default function Navbar() {
   }, [open]);
 
   const isActive = (href: string) => {
-    if (href.includes('/#')) return pathname === '/';
+    if (href.includes('/#')) {
+      const sectionId = href.split('#')[1];
+      return pathname === '/' && activeSection === sectionId;
+    }
     return pathname === href;
   };
 
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         !isHome || scrolled
@@ -99,40 +121,41 @@ export default function Navbar() {
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
-
-      <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden z-40 transition-opacity duration-300 ${
-          open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      <div
-        className={`fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-navbar border-l border-neutral-800 md:hidden shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
-          open ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        aria-hidden={!open}
-      >
-        <div className="flex flex-col pt-24 px-6 gap-2">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`flex items-center gap-3 px-4 py-3.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-                isActive(link.href)
-                  ? 'text-secondary-500 bg-secondary-500/10 border-l-2 border-secondary-500'
-                  : 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/5 border-l-2 border-transparent hover:border-secondary-500/50'
-              }`}
-              style={{ transitionDelay: `${index * 60}ms` }}
-              onClick={() => setOpen(false)}
-            >
-              <link.icon size={18} className="shrink-0" />
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
     </header>
+
+    <div
+      className={`fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden z-40 transition-opacity duration-300 ${
+        open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+      onClick={() => setOpen(false)}
+      aria-hidden="true"
+    />
+
+    <div
+      className={`fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-navbar border-l border-neutral-800 md:hidden shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
+        open ? 'translate-x-0' : 'translate-x-full'
+      }`}
+      aria-hidden={!open}
+    >
+      <div className="flex flex-col pt-24 px-6 gap-2">
+        {navLinks.map((link, index) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={`flex items-center gap-3 px-4 py-3.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+              isActive(link.href)
+                ? 'text-secondary-500 bg-secondary-500/10 border-l-2 border-secondary-500'
+                : 'text-neutral-400 hover:text-secondary-500 hover:bg-secondary-500/5 border-l-2 border-transparent hover:border-secondary-500/50'
+            }`}
+            style={{ transitionDelay: `${index * 60}ms` }}
+            onClick={() => setOpen(false)}
+          >
+            <link.icon size={18} className="shrink-0" />
+            {link.label}
+          </a>
+        ))}
+      </div>
+      </div>
+    </>
   );
 }
